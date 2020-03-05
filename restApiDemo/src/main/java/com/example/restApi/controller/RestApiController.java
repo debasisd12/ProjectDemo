@@ -11,13 +11,13 @@ import com.example.restApi.model.BookDetails;
 import com.example.restApi.service.RestApiService;
 
 @RestController
-@RequestMapping("restApi/v1")
+@RequestMapping(value="/restApi/v1")
 public class RestApiController {
 
 	@Autowired
 	private RestApiService servApi;
 	
-	@GetMapping("/books")
+	@GetMapping(value="/books")
 	public List<BookDetails> getAllBookDetails()
 	{
 		return servApi.findAllBookDetailsService();
