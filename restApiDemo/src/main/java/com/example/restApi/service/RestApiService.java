@@ -30,16 +30,16 @@ public class RestApiService {
 	}
 
 	public BookDetails addNewBookDetails(BookDetails bDetails) {
-		/*
-		 * String requestedBookName=bDetails.getBookName(); String
-		 * requestedBookEdition=bDetails.getBookEdition(); String
-		 * requestedBookAuthor=bDetails.getBookAuthor(); String
-		 * requestedBookDesc=bDetails.getBookDescription();
-		 */
-    	
+		    	
     	BookDetails bdetails = repoApi.save(bDetails);
     	
 		return bdetails;
+	}
+
+	// Soft delete by changing bookstatue to inActive
+	public void deActiveBookById(int bid) {
+		
+		repoApi.deActiveBookById(bid);
 	}
 
 }

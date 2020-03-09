@@ -23,7 +23,9 @@ public class BookDetails {
 	private String bookEdition;
 	@Column(name="bookdescription", nullable=false, length=45)
 	private String bookDescription;
-
+	
+	@Column(name="bookstatus", length=45)
+	private String bookStatus;
 	public BookDetails() {
 		super();
 	}
@@ -63,5 +65,11 @@ public class BookDetails {
 	}
 	public void setBookDescription(String bookDescription) {
 		this.bookDescription = bookDescription;
+	}
+	public String getBookStatus() {
+		return bookStatus;
+	}
+	public void setBookStatus(String bookStatus) {
+		this.bookStatus = bookStatus;
 	}
 }

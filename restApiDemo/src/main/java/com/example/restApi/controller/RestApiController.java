@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,8 +33,6 @@ public class RestApiController {
 	{
 		try {
 		      List<BookDetails> bookdetails = new ArrayList<BookDetails>();
-
-		      System.out.println(bookName+"----bookName");
 		      if (bookName == null)
 		      {
 		    	  servApi.findAllBookDetailsService().forEach(bookdetails::add);
@@ -43,7 +40,6 @@ public class RestApiController {
 		      else
 		      {
 		    	  servApi.findByTitleContaining(bookName).forEach(bookdetails::add);
-		    	  System.out.println(bookName+"----bookName");
 		      }
 		      if (bookdetails.isEmpty()) {
 		        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -96,4 +92,19 @@ public class RestApiController {
 	      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	    }
 	  }
+	// soft delete. changing bookAvil status to inActive.
+	@GetMapping("/books/deActive/{bookId}")
+	  public ResponseEntity<BookDetails> deActivateBook(@PathVariable("bookId") int bid) {
+	    Optional<BookDetails> BooksData =servApi.findBookDetailsById(bid);
+
+	    if (BooksData.isPresent()) {
+	    	servApi.deActiveBookById(bid);
+	      
+	      return new ResponseEntity<>( HttpStatus.OK);
+	    } else {
+	      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    }
+	  }
+	
+	
 }
